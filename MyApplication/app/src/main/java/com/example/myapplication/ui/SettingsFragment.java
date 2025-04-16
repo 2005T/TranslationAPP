@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.example.myapplication.databinding.FragmentSettingsBinding;
 import com.example.myapplication.model.Language;
 import com.example.myapplication.model.UserSettings;
 import com.example.myapplication.service.TextToSpeechService;
+import com.example.myapplication.service.TranslationServiceFactory.TranslationServiceType;
 import com.example.myapplication.service.impl.AndroidTextToSpeechService;
 
 import java.util.ArrayList;
@@ -67,6 +71,9 @@ public class SettingsFragment extends Fragment {
 
         // 设置开关控件
         setupSwitches();
+        
+        // 设置翻译服务选择
+        setupTranslationServiceSelection();
 
         // 设置其他UI元素
         setupOtherUI();
@@ -190,6 +197,27 @@ public class SettingsFragment extends Fragment {
         binding.darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             userSettings.setDarkModeEnabled(isChecked);
             updateDarkMode(isChecked);
+        });
+    }
+    
+    private void setupTranslationServiceSelection() {
+        // 根据当前设置选择对应的单选按钮
+        TranslationServiceType currentType = userSettings.getTranslationServiceType();
+        if (currentType == TranslationServiceType.GOOGLE_ML_KIT) {
+            binding.radioGoogleMlKit.setChecked(true);
+        } else if (currentType == TranslationServiceType.TENCENT_TMT) {
+            binding.radioTencentTmt.setChecked(true);
+        }
+        
+        // 设置单选按钮组的监听器
+        binding.translationServiceRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == binding.radioGoogleMlKit.getId()) {
+                userSettings.setTranslationServiceType(TranslationServiceType.GOOGLE_ML_KIT);
+                Toast.makeText(requireContext(), "已切换到Google ML Kit翻译服务（离线）", Toast.LENGTH_SHORT).show();
+            } else if (checkedId == binding.radioTencentTmt.getId()) {
+                userSettings.setTranslationServiceType(TranslationServiceType.TENCENT_TMT);
+                Toast.makeText(requireContext(), "已切换到腾讯机器翻译服务（在线）", Toast.LENGTH_SHORT).show();
+            }
         });
     }
     

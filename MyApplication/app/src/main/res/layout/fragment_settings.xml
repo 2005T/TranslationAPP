@@ -207,6 +207,62 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:text="翻译服务"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="选择翻译服务提供商"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:id="@+id/translationServiceRadioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <RadioButton
+                            android:id="@+id/radioGoogleMlKit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Google ML Kit（离线翻译，无需联网）" />
+
+                        <RadioButton
+                            android:id="@+id/radioTencentTmt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="腾讯机器翻译（在线翻译，需要联网）" />
+                    </RadioGroup>
+                    
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="注意：在线翻译服务需要网络连接，但翻译质量通常更高。"
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="关于应用"
                 android:textSize="18sp"
                 android:textStyle="bold" />

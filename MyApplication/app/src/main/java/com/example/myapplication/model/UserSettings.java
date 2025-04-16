@@ -1,5 +1,7 @@
 package com.example.myapplication.model;
 
+import com.example.myapplication.service.TranslationServiceFactory.TranslationServiceType;
+
 /**
  * 用户设置类，用于存储用户偏好
  */
@@ -9,6 +11,7 @@ public class UserSettings {
     private float speechRate;  // 语音播放速度 (0.5f-2.0f)
     private boolean autoSaveHistory;  // 是否自动保存历史记录
     private boolean darkModeEnabled;  // 是否启用深色模式
+    private TranslationServiceType translationServiceType; // 翻译服务类型
     
     // 单例模式
     private static UserSettings instance;
@@ -21,6 +24,7 @@ public class UserSettings {
         this.speechRate = 1.0f;               // 正常语速
         this.autoSaveHistory = true;          // 默认自动保存历史
         this.darkModeEnabled = false;         // 默认浅色模式
+        this.translationServiceType = TranslationServiceType.GOOGLE_ML_KIT; // 默认使用GoogleMLKit
     }
     
     // 获取单例实例
@@ -77,5 +81,13 @@ public class UserSettings {
     
     public void setDarkModeEnabled(boolean darkModeEnabled) {
         this.darkModeEnabled = darkModeEnabled;
+    }
+    
+    public TranslationServiceType getTranslationServiceType() {
+        return translationServiceType;
+    }
+    
+    public void setTranslationServiceType(TranslationServiceType translationServiceType) {
+        this.translationServiceType = translationServiceType;
     }
 } 

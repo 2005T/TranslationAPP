@@ -23,6 +23,7 @@ import com.example.myapplication.model.UserSettings;
 import com.example.myapplication.service.TextToSpeechService;
 import com.example.myapplication.service.TranslationHistoryManager;
 import com.example.myapplication.service.TranslationService;
+import com.example.myapplication.service.TranslationServiceFactory;
 import com.example.myapplication.service.impl.AndroidTextToSpeechService;
 import com.example.myapplication.service.impl.GoogleMLKitTranslationService;
 
@@ -50,7 +51,7 @@ public class TextTranslationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // 初始化服务
-        translationService = new GoogleMLKitTranslationService();
+        translationService = TranslationServiceFactory.getDefaultService();
         ttsService = new AndroidTextToSpeechService(requireContext());
         historyManager = new TranslationHistoryManager(requireContext());
         userSettings = UserSettings.getInstance();
